@@ -1,0 +1,20 @@
+{
+  "name": "crawlamz_wss",
+  "version": "1.0.0",
+  "description": "run ",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "tuan",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.16.4",
+    "globals": "^11.11.0",
+    "mongodb": "^3.1.13",
+    "puppeteer": "^1.12.2",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4"
+  }
+}
