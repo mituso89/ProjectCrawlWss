@@ -52,12 +52,12 @@ const blockedResourceTypes = [
         promisesBrowsers.push(new Promise(async (resBrowser) => {
 
             let proxy = proxyList[Math.floor(Math.random() * proxyList.length)]
-            /* let proxyServer = '--proxy-server=' + proxy.proxyIp + '' */
+            let proxyServer = '--proxy-server=' + proxy.proxyIp + ''
             const browser = await puppeteer.launch(
                 {
                     headless: true,
                     args: [
-                       /* proxyServer, */
+                       proxyServer,
                         '--no-sandbox',
                         '--disable-setuid-sandbox',
                         '--disable-infobars',
@@ -81,9 +81,9 @@ const blockedResourceTypes = [
                         seller = seller.replace("{asin}",asin)
                         console.log(`Visiting url: ${url}`);
                         let page = await browser.newPage();
-                       /*  let username = proxy.proxyName;
+                        let username = proxy.proxyName;
                         let password = proxy.proxyPass;
-                         await page.authenticate({ username, password }); */
+                         await page.authenticate({ username, password });
 
 
                         await page.setRequestInterception(true);
