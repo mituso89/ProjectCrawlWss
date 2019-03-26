@@ -57,7 +57,7 @@ const blockedResourceTypes = [
                 {
                     headless: true,
                     args: [
-                       proxyServer,
+                       /* proxyServer, */
                         '--no-sandbox',
                         '--disable-setuid-sandbox',
                         '--disable-infobars',
@@ -81,9 +81,9 @@ const blockedResourceTypes = [
                         seller = seller.replace("{asin}",asin)
                         console.log(`Visiting url: ${url}`);
                         let page = await browser.newPage();
-                        let username = proxy.proxyName;
+                       /*  let username = proxy.proxyName;
                         let password = proxy.proxyPass;
-                         await page.authenticate({ username, password });
+                         await page.authenticate({ username, password }); */
 
 
                         await page.setRequestInterception(true);
