@@ -21,12 +21,12 @@ function tuan(){
  
          
      }) */
-     /* amztxt = amztxt.slice(4000,5000)  */
+     amztxt = amztxt.slice(5000) 
      let arrayAsin = []
  
      arrayAsin.push(new Promise(async (NumAPI) => {
          let arrayasin1 = []
-         for (let number = 0; number < 3; number++) {
+         for (let number = 0; number < 1; number++) {
              arrayasin1.push(new Promise(async (res) => {
                  while (amztxt.length > 0) {
                      let asinObject = amztxt.pop()
