@@ -45,14 +45,14 @@ const blockedResourceTypes = [
 
     const promisesBrowsers = [];
     let amztxt = await readFile()
-     amztxt = amztxt.slice(0,1000) 
+    amztxt = amztxt.slice(10000,19999) 
 
 
     for (let numBrowser = 0; numBrowser < NUM_BROWSERS; numBrowser++) {
         promisesBrowsers.push(new Promise(async (resBrowser) => {
 
             let proxy = proxyList[Math.floor(Math.random() * proxyList.length)]
-            let proxyServer = '--proxy-server=' + proxy.proxyIp + ''
+            /* let proxyServer = '--proxy-server=' + proxy.proxyIp + '' */
             const browser = await puppeteer.launch(
                 {
                     headless: true,

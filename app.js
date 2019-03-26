@@ -21,7 +21,7 @@ function tuan(){
  
          
      }) */
-     amztxt = amztxt.slice(5000) 
+     amztxt = amztxt.slice(0,5000) 
      let arrayAsin = []
  
      arrayAsin.push(new Promise(async (NumAPI) => {
