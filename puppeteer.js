@@ -46,7 +46,7 @@ const blockedResourceTypes = [
 
     const promisesBrowsers = [];
     let amztxt = await readFile()
-    amztxt = amztxt.slice(1000, 2000)
+    amztxt = amztxt.slice(10000, 11000)
 
     const delaytimearray=[8,9,10,11,12,13,14,15,16]
 
