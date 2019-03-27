@@ -11,7 +11,7 @@ let amazon = async (url, seller) => {
         let proxiedRequest = request.defaults({
             /* proxy: 'http://5.79.66.2:13080', */
 
-            proxy: proxyUrl,
+            /* proxy: proxyUrl, */
             headers: {
 
                 'User-Agent': userAgent,

@@ -46,7 +46,7 @@ const blockedResourceTypes = [
 
     const promisesBrowsers = [];
     let amztxt = await readFile()
-    amztxt = amztxt.slice(10000, 11000)
+    amztxt = amztxt.slice(1000,2000) 
 
     const delaytimearray=[8,9,10,11,12,13,14,15,16]
 
@@ -79,7 +79,7 @@ const blockedResourceTypes = [
                         let asinObject = amztxt.pop()
                         const asin = asinObject
                         const url = "https://www.amazon.com/dp/" + asin;
-                        let seller = "https://www.amazon.com/gp/offer-listing/{asin}/ref=dp_olp_new_mbc?ie=UTF8&condition=new"
+                        let seller = "https://www.amazon.com/gp/offer-listing/{asin}"
                         seller = seller.replace("{asin}", asin)
                         console.log(`Visiting url: ${url}`);
                         let page = await browser.newPage();
@@ -156,6 +156,7 @@ const blockedResourceTypes = [
                                             }).catch(err => {
                                                 console.log(err)
                                             })
+                                            
                                         }
 
                                     }

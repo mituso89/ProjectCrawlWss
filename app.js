@@ -34,16 +34,19 @@ function tuan(){
                      let asinObject = amztxt.pop()
                      let asin =  asinObject
                      let link = "https://www.amazon.com/gp/product/" + asin
-                     let seller  = "https://www.amazon.com/gp/offer-listing/{asin}/ref=dp_olp_new_mbc?ie=UTF8&condition=new"
+                     let seller  = "https://www.amazon.com/gp/offer-listing/{asin}"
                      seller = seller.replace("{asin}",asin)
                      let delaytime = delaytimearray[Math.floor(Math.random() * delaytimearray.length)]
-
+                     console.log(`Visiting url: ${link}`);
                      let detail = await getHtml(link).then((txt) => {
                          return txt;
                      }).catch((err) => {
  
                          console.log("detail: " + err)
                      })
+                     await delay(delaytime*1000)
+                     
+                     
                      let detailseller = await getHtml(seller).then((txt) => {
                          return txt;
  
@@ -51,6 +54,7 @@ function tuan(){
                          console.log("detalseller: " + err)
                          
                      })
+                     await delay((delaytime+1)*1000)
                      if (detail == null || detail == ""  ) {
                          console.log("detail error: " + asin)
                      }
@@ -79,11 +83,12 @@ function tuan(){
                                      result.shipping = tuan1.shipping
                                      //,asinObject._id
                                      const product =await new Product(result.category, result.ratting, result.name, result.price, result.shipping, result.asin, result.weighItem, result.shippingItem, result.imageList)
-                                     await product.save().then(res => {
+                                    /*  await product.save().then(res => {
                                          console.log("update thanh cong :"+ asin)
                                      }).catch(err => {
                                          console.log(err)
-                                     })
+                                     }) */
+                                     console.log(result)
                                  }
                               
                              }
