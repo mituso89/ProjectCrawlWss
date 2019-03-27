@@ -75,7 +75,7 @@ function tuan(){
                                      result.price = tuan1.price
                                      result.shipping = tuan1.shipping
                                      //,asinObject._id
-                                     const product = new Product(result.category, result.ratting, result.name, result.price, result.shipping, result.asin, result.weighItem, result.shippingItem, result.imageList)
+                                     const product =await new Product(result.category, result.ratting, result.name, result.price, result.shipping, result.asin, result.weighItem, result.shippingItem, result.imageList)
                                      await product.save().then(res => {
                                          console.log("update thanh cong :"+ asin)
                                      }).catch(err => {

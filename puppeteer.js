@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 
+const delay = require('delay')
 const NUM_BROWSERS = 1;
 const NUM_PAGES = 1;
 let fs = require('fs');
@@ -45,8 +46,9 @@ const blockedResourceTypes = [
 
     const promisesBrowsers = [];
     let amztxt = await readFile()
-    amztxt = amztxt.slice(10000,19999) 
+    amztxt = amztxt.slice(1000, 2000)
 
+    const delaytimearray=[8,9,10,11,12,13,14,15,16]
 
     for (let numBrowser = 0; numBrowser < NUM_BROWSERS; numBrowser++) {
         promisesBrowsers.push(new Promise(async (resBrowser) => {
@@ -55,9 +57,9 @@ const blockedResourceTypes = [
             let proxyServer = '--proxy-server=' + proxy.proxyIp + ''
             const browser = await puppeteer.launch(
                 {
-                    headless: true,
+                    headless: false,
                     args: [
-                       proxyServer,
+                        /* proxyServer, */
                         '--no-sandbox',
                         '--disable-setuid-sandbox',
                         '--disable-infobars',
@@ -75,17 +77,17 @@ const blockedResourceTypes = [
                 promisesPages.push(new Promise(async (resPage) => {
                     while (amztxt.length > 0) {
                         let asinObject = amztxt.pop()
-                        const asin =  asinObject
+                        const asin = asinObject
                         const url = "https://www.amazon.com/dp/" + asin;
-                        let seller  = "https://www.amazon.com/gp/offer-listing/{asin}/ref=dp_olp_new_mbc?ie=UTF8&condition=new"
-                        seller = seller.replace("{asin}",asin)
+                        let seller = "https://www.amazon.com/gp/offer-listing/{asin}/ref=dp_olp_new_mbc?ie=UTF8&condition=new"
+                        seller = seller.replace("{asin}", asin)
                         console.log(`Visiting url: ${url}`);
                         let page = await browser.newPage();
                         let username = proxy.proxyName;
                         let password = proxy.proxyPass;
-                         await page.authenticate({ username, password });
+                        /* await page.authenticate({ username, password }); */
 
-
+                        let delaytime = delaytimearray[Math.floor(Math.random() * delaytimearray.length)]
                         await page.setRequestInterception(true);
 
                         page.on('request', request => {
@@ -109,8 +111,9 @@ const blockedResourceTypes = [
 
 
                             });
-
+                            await delay(delaytime*1000)
                             await page.goto(seller);
+                            await delay((delaytime+1)*1000)
                             const resultseller = await page.evaluate(() => {
 
                                 data = document.querySelector('html').innerHTML
@@ -126,7 +129,7 @@ const blockedResourceTypes = [
                                 let $ = cheerio.load(result)
                                 let tuan = await productdetail.productdetail($, asin)
                                 if (JSON.stringify(tuan) == "{}") {
-
+                                    console.log("productdetail: " + JSON.stringify(tuan) + "")
                                 }
                                 else {
                                     let result = tuan
@@ -141,11 +144,12 @@ const blockedResourceTypes = [
 
                                         let tuan1 = await productdetail.productseller($1, asin)
                                         if (JSON.stringify(tuan1) == "{}") {
-
+                                            console.log("productSeller: " + JSON.stringify(tuan1) + "")
                                         }
                                         else {
                                             result.price = tuan1.price
                                             result.shipping = tuan1.shipping
+                                            console.log(result)
                                             const product = new Product(result.category, result.ratting, result.name, result.price, result.shipping, result.asin, result.weighItem, result.shippingItem, result.imageList, asinObject._id)
                                             await product.save().then(res => {
                                                 console.log("update thanh cong :" + asin)
@@ -176,7 +180,10 @@ const blockedResourceTypes = [
             }
 
             await Promise.all(promisesPages);
+            
             await browser.close();
+            
+
             resBrowser();
         }));
     }
