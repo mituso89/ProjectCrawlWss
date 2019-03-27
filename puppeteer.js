@@ -149,7 +149,7 @@ const blockedResourceTypes = [
                                         else {
                                             result.price = tuan1.price
                                             result.shipping = tuan1.shipping
-                                            console.log(result)
+                                            
                                             const product = new Product(result.category, result.ratting, result.name, result.price, result.shipping, result.asin, result.weighItem, result.shippingItem, result.imageList, asinObject._id)
                                             await product.save().then(res => {
                                                 console.log("update thanh cong :" + asin)
