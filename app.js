@@ -5,6 +5,7 @@ const mongoConnect = require('./ulti/database')
 const getHtml = require('./common/getHtml')
 const productdetail = require('./common/productCommon')
 const readFile = require('./common/readFileCommon')
+const delay = require('delay')
 
 
 function tuan(){
@@ -21,8 +22,9 @@ function tuan(){
  
          
      }) */
-     amztxt = amztxt.slice(0,5000) 
+     amztxt = amztxt.slice(1000,2000) 
      let arrayAsin = []
+     const delaytimearray=[8,9,10,11,12,13,14,15,16]
  
      arrayAsin.push(new Promise(async (NumAPI) => {
          let arrayasin1 = []
@@ -34,6 +36,7 @@ function tuan(){
                      let link = "https://www.amazon.com/gp/product/" + asin
                      let seller  = "https://www.amazon.com/gp/offer-listing/{asin}/ref=dp_olp_new_mbc?ie=UTF8&condition=new"
                      seller = seller.replace("{asin}",asin)
+                     let delaytime = delaytimearray[Math.floor(Math.random() * delaytimearray.length)]
 
                      let detail = await getHtml(link).then((txt) => {
                          return txt;
@@ -55,7 +58,7 @@ function tuan(){
                          let $ = cheerio.load(detail)
                          let tuan = await productdetail.productdetail($, asin)
                          if(JSON.stringify(tuan)=="{}"){
- 
+                            console.log("productdetail: " + JSON.stringify(tuan) + "")
                          }
                          else{
                              let result = tuan
@@ -69,7 +72,7 @@ function tuan(){
      
                                  let tuan1 = await productdetail.productseller($1, asin)
                                  if(JSON.stringify(tuan1)=="{}"){
- 
+                                    console.log("productSeller: " + JSON.stringify(tuan1) + "")
                                  }
                                  else{
                                      result.price = tuan1.price
