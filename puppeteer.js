@@ -57,7 +57,7 @@ const blockedResourceTypes = [
             let proxyServer = '--proxy-server=' + proxy.proxyIp + ''
             const browser = await puppeteer.launch(
                 {
-                    headless: false,
+                    headless: true,
                     args: [
                         /* proxyServer, */
                         '--no-sandbox',
