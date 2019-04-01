@@ -83,11 +83,11 @@ function tuan(){
                                      result.shipping = tuan1.shipping
                                      //,asinObject._id
                                      const product =await new Product(result.category, result.ratting, result.name, result.price, result.shipping, result.asin, result.weighItem, result.shippingItem, result.imageList)
-                                     await product.save().then(res => {
+                                    /*  await product.save().then(res => {
                                          console.log("update thanh cong :"+ asin)
                                      }).catch(err => {
                                          console.log(err)
-                                     })
+                                     }) */
                                      /* console.log(result) */
                                  }
                               
@@ -116,7 +116,7 @@ function tuan(){
  
      await Promise.all(arrayAsin);
  
- 
+     console.log("ket thuc")
  
  })()
  
