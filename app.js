@@ -22,9 +22,9 @@ function tuan(){
  
          
      }) */
-     amztxt = amztxt.slice(2001,5000) 
+     amztxt = amztxt.slice(30001,35000) 
      let arrayAsin = []
-     const delaytimearray=[8,9,10,11,12,13,14,15,16]
+     const delaytimearray=[8,9,10,11,12,13,14]
  
      arrayAsin.push(new Promise(async (NumAPI) => {
          let arrayasin1 = []
@@ -54,7 +54,7 @@ function tuan(){
                          console.log("detalseller: " + err)
                          
                      })
-                     await delay((delaytime+1)*1000)
+                     await delay((delaytime-1)*1000)
                      if (detail == null || detail == ""  ) {
                          console.log("detail error: " + asin)
                      }
@@ -83,11 +83,11 @@ function tuan(){
                                      result.shipping = tuan1.shipping
                                      //,asinObject._id
                                      const product =await new Product(result.category, result.ratting, result.name, result.price, result.shipping, result.asin, result.weighItem, result.shippingItem, result.imageList)
-                                    /*  await product.save().then(res => {
+                                     await product.save().then(res => {
                                          console.log("update thanh cong :"+ asin)
                                      }).catch(err => {
                                          console.log(err)
-                                     }) */
+                                     })
                                      /* console.log(result) */
                                  }
                               

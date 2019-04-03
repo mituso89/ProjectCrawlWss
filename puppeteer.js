@@ -79,6 +79,7 @@ const blockedResourceTypes = [
                         let asinObject = amztxt.pop()
                         const asin = asinObject
                         const url = "https://www.amazon.com/dp/" + asin;
+                        //https://www.amazon.com/gp/offer-listing/B0798X4H63/ref=dp_olp_new_center?ie=UTF8&condition=new
                         let seller = "https://www.amazon.com/gp/offer-listing/{asin}"
                         seller = seller.replace("{asin}", asin)
                         console.log(`Visiting url: ${url}`);
