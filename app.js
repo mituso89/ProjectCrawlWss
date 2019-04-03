@@ -22,7 +22,7 @@ function tuan(){
  
          
      }) */
-     amztxt = amztxt.slice(30001,35000) 
+     amztxt = amztxt.slice(35001,40000) 
      let arrayAsin = []
      const delaytimearray=[8,9,10,11,12,13,14]
  
